@@ -83,6 +83,9 @@
       transition: transform .25s ease, box-shadow .25s ease;
       cursor: pointer;
       position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp .6s forwards;
     }
 
     .item:hover {
@@ -134,17 +137,16 @@
 
     footer {
       text-align: center;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
       border-top: 1px solid rgba(255,255,255,0.05);
       font-size: .9rem;
       color: var(--muted);
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
     }
 
-    /* Simple appear animation */
-    .item {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s forwards;
+    footer strong {
+      color: var(--accent1);
     }
 
     @keyframes fadeInUp {
@@ -153,36 +155,35 @@
         transform: translateY(0);
       }
     }
-
   </style>
 </head>
 <body>
   <header>
     <h1>Shop de BrainRot</h1>
     <div class="links">
-      <a href="https://discord.gg/rdFCZYhNcA" target="_blank">Discord</a>
-      <a href="https://tiktok.com/@shop2brainrot_new" target="_blank">TikTok</a>
+      <a href="https://discord.gg/rdFCZYhNcA" target="_blank">💬 Discord</a>
+      <a href="https://tiktok.com/@shop2brainrot_new" target="_blank">🎵 TikTok</a>
     </div>
   </header>
 
   <main>
-    <section class="shop" id="shop">
-      <!-- Produits générés par JS -->
-    </section>
+    <section class="shop" id="shop"></section>
   </main>
 
   <footer>
-    © <span id="year"></span> Shop de BrainRot — Tous droits réservés
+    © <span id="year"></span> Shop de BrainRot — Tous droits réservés.<br>
+    ⚠️ <strong>Les produits BrainRot sont uniquement achetables via le serveur Discord :</strong> 
+    <a href="https://discord.gg/rdFCZYhNcA" target="_blank">discord.gg/rdFCZYhNcA</a>
   </footer>
 
   <script>
     const products = [
-      { name: "Casquette BrainRot", price: 19.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=Casquette", stock: true },
-      { name: "Hoodie BrainRot", price: 49.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Hoodie", stock: true },
-      { name: "T-shirt Futuriste", price: 29.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=T-shirt", stock: false },
-      { name: "Tapis de souris", price: 14.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Tapis+de+souris", stock: true },
-      { name: "Sac à dos BrainRot", price: 59.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=Sac+à+dos", stock: false },
-      { name: "Bouteille BrainRot", price: 24.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Bouteille", stock: true }
+      { name: "Tung Tung Tung Sahur", price: 19.99, file: "tungtungtungsahur.jpg", stock: true },
+      { name: "Hoodie BrainRot", price: 49.99, file: "hoodie.jpg", stock: true },
+      { name: "T-shirt Futuriste", price: 29.99, file: "tshirt.jpg", stock: false },
+      { name: "Tapis de souris", price: 14.99, file: "tapis.jpg", stock: true },
+      { name: "Sac à dos BrainRot", price: 59.99, file: "sacados.jpg", stock: false },
+      { name: "Bouteille BrainRot", price: 24.99, file: "bouteille.jpg", stock: true }
     ];
 
     const shop = document.getElementById('shop');
@@ -194,7 +195,7 @@
       div.className = 'item';
       div.style.animationDelay = `${i * 0.1}s`;
       div.innerHTML = `
-        <img src="${p.img}" alt="${p.name}">
+        <img src="${p.file}" alt="${p.name}">
         <div class="info">
           <div class="name">${p.name}</div>
           <div class="price">€${p.price.toFixed(2)}</div>
