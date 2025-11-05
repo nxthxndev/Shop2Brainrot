@@ -17,38 +17,34 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(1000px at 10% 10%, rgba(124,245,255,0.07), transparent),
-                  radial-gradient(900px at 90% 80%, rgba(155,107,255,0.05), transparent),
-                  var(--bg);
+      background: linear-gradient(120deg, #05060a, #0a0630, #060930);
+      background-size: 300% 300%;
       color: var(--text);
+      animation: rgbMove 10s ease infinite;
       overflow-x: hidden;
       min-height: 100vh;
-      animation: rgbGlow 10s linear infinite;
     }
 
-    @keyframes rgbGlow {
-      0% { background-color: #05060a; }
-      25% { background-color: #0a0630; }
-      50% { background-color: #060930; }
-      75% { background-color: #0a0630; }
-      100% { background-color: #05060a; }
+    @keyframes rgbMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
       text-align: center;
       padding: 2rem 1rem 1rem;
       border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.3);
       backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
-      z-index: 20;
-      box-shadow: 0 0 20px rgba(255,255,255,0.03);
+      z-index: 50;
     }
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
       background-size: 400% 400%;
       -webkit-background-clip: text;
@@ -66,53 +62,65 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-top: .6rem;
+      margin-top: .5rem;
     }
+
     .links a {
       color: var(--muted);
       text-decoration: none;
-      font-weight: 500;
       transition: color .3s, text-shadow .3s;
     }
     .links a:hover {
       color: white;
-      text-shadow: 0 0 12px cyan;
+      text-shadow: 0 0 10px cyan;
     }
 
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem 4rem;
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
     }
 
-    .category {
-      margin-top: 3rem;
-    }
-    .category h2 {
+    .cat-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: .6rem 1.3rem;
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, cyan, violet);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 10px rgba(124,245,255,0.4);
+      letter-spacing: 1px;
+      transition: all .3s ease;
     }
 
-    .items {
+    .cat-btn:hover, .cat-btn.active {
+      background: linear-gradient(90deg, cyan, violet);
+      color: #000;
+      box-shadow: 0 0 20px rgba(124,245,255,0.3);
+    }
+
+    .shop {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 1rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.3rem;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeIn .6s forwards;
     }
 
     .item {
       background: rgba(255,255,255,0.06);
-      border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
       overflow: hidden;
-      transform: translateY(20px);
+      transition: transform .3s, box-shadow .3s;
       opacity: 0;
-      animation: fadeInUp .8s forwards;
-      transition: transform .3s ease, box-shadow .3s ease;
+      transform: translateY(10px);
+      animation: fadeUp .5s forwards;
     }
 
     .item:hover {
@@ -130,22 +138,9 @@
       padding: 1rem;
     }
 
-    .name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .price {
-      color: cyan;
-      font-weight: bold;
-      margin-top: .3rem;
-    }
-
-    .stock {
-      font-size: .9rem;
-      color: var(--muted);
-    }
-
+    .name { font-weight: 600; font-size: 1.1rem; }
+    .price { color: cyan; font-weight: bold; margin-top: .4rem; }
+    .stock { font-size: .9rem; color: var(--muted); }
     .in-stock::before { content: "🟢 "; }
     .out-stock::before { content: "🔴 "; }
 
@@ -155,17 +150,14 @@
       border-top: 1px solid rgba(255,255,255,0.05);
       font-size: .9rem;
       color: var(--muted);
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
     }
 
-    footer strong {
-      color: cyan;
-    }
+    footer strong { color: cyan; }
 
-    @keyframes fadeInUp {
-      to { transform: translateY(0); opacity: 1; }
-    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
   </style>
 </head>
 <body>
@@ -175,10 +167,18 @@
       <a href="https://discord.gg/rdFCZYhNcA" target="_blank">💬 Discord</a>
       <a href="https://tiktok.com/@shop2brainrot_new" target="_blank">🎵 TikTok</a>
     </div>
+
+    <div class="categories">
+      <button class="cat-btn active" data-cat="Légendaire">Légendaire</button>
+      <button class="cat-btn" data-cat="Mythique">Mythique</button>
+      <button class="cat-btn" data-cat="Secret">Secret</button>
+      <button class="cat-btn" data-cat="OG">OG</button>
+      <button class="cat-btn" data-cat="Autres">Autres</button>
+    </div>
   </header>
 
-  <main id="shop">
-    <!-- Catégories auto-générées -->
+  <main>
+    <section class="shop" id="shop"></section>
   </main>
 
   <footer>
@@ -191,16 +191,16 @@
     const categories = {
       "Légendaire": [
         { name: "BrainRot Gold", price: 99.99, file: "brainrot_gold.jpg", stock: true },
-        { name: "BrainRot Galaxy", price: 149.99, file: "brainrot_galaxy.jpg", stock: false },
+        { name: "BrainRot Galaxy", price: 149.99, file: "brainrot_galaxy.jpg", stock: false }
       ],
       "Mythique": [
-        { name: "BrainRot Flame", price: 89.99, file: "brainrot_flame.jpg", stock: true },
+        { name: "BrainRot Flame", price: 89.99, file: "brainrot_flame.jpg", stock: true }
       ],
       "Secret": [
-        { name: "BrainRot Shadow", price: 129.99, file: "brainrot_shadow.jpg", stock: true },
+        { name: "BrainRot Shadow", price: 129.99, file: "brainrot_shadow.jpg", stock: true }
       ],
       "OG": [
-        { name: "BrainRot V1 OG", price: 49.99, file: "brainrot_v1.jpg", stock: false },
+        { name: "BrainRot V1 OG", price: 49.99, file: "brainrot_v1.jpg", stock: false }
       ],
       "Autres": [
         { name: "BrainRot Bottle", price: 19.99, file: "bottle.jpg", stock: true },
@@ -212,17 +212,9 @@
     const year = document.getElementById("year");
     year.textContent = new Date().getFullYear();
 
-    // Générer dynamiquement les catégories
-    Object.entries(categories).forEach(([catName, items]) => {
-      const section = document.createElement("section");
-      section.className = "category";
-      const title = document.createElement("h2");
-      title.textContent = catName;
-      section.appendChild(title);
-
-      const grid = document.createElement("div");
-      grid.className = "items";
-
+    function loadCategory(catName) {
+      shop.innerHTML = "";
+      const items = categories[catName];
       items.forEach((p, i) => {
         const div = document.createElement("div");
         div.className = "item";
@@ -235,14 +227,23 @@
             <div class="stock ${p.stock ? "in-stock" : "out-stock"}">
               ${p.stock ? "En stock" : "Rupture de stock"}
             </div>
-          </div>
-        `;
-        grid.appendChild(div);
+          </div>`;
+        shop.appendChild(div);
       });
+    }
 
-      section.appendChild(grid);
-      shop.appendChild(section);
+    // Boutons de catégories
+    const buttons = document.querySelectorAll(".cat-btn");
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadCategory(btn.dataset.cat);
+      });
     });
+
+    // Affiche la catégorie par défaut
+    loadCategory("Légendaire");
   </script>
 </body>
 </html>
