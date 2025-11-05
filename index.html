@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shop 2 Brainrot</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;600&display=swap');
-
     :root {
       --bg: #05060a;
       --text: #e8eefc;
@@ -14,258 +13,217 @@
       --accent1: cyan;
       --accent2: violet;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(120deg, #05060a, #0a0630, #060930);
-      background-size: 300% 300%;
-      color: var(--text);
-      animation: bgMove 10s ease infinite;
-      overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 3rem 1rem;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(120deg,#05060a,#0a0630,#060930);
+      background-size:300% 300%;
+      color:var(--text);
+      animation:bgMove 10s ease infinite;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:3rem 1rem;
     }
-
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes bgMove{
+      0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}
     }
-
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8rem;
-      text-align: center;
-      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rgbText 6s linear infinite;
-      margin-bottom: 1.5rem;
+    h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:2.4rem;
+      text-align:center;
+      background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
+      background-size:400% 400%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:rgbText 6s linear infinite;
+      margin-bottom:1.25rem;
     }
-
-    @keyframes rgbText {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes rgbText{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .search-container{width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;gap:0.8rem}
+    input{
+      width:100%;
+      padding:0.9rem 1rem;
+      font-size:1rem;
+      border-radius:10px;border:none;outline:none;
+      background:rgba(255,255,255,0.08);color:var(--text);text-align:center;
+      transition:box-shadow .25s,background .25s;
     }
-
-    .search-container {
-      width: 100%;
-      max-width: 500px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    input:focus{background:rgba(255,255,255,0.12);box-shadow:0 0 20px rgba(124,245,255,0.25)}
+    .btn-rare{
+      padding:.8rem 1.4rem;border-radius:10px;border:none;
+      background:linear-gradient(90deg,cyan,violet);color:#000;font-weight:700;
+      cursor:pointer;font-family:'Orbitron',sans-serif;letter-spacing:.6px;
+      transition:transform .18s,box-shadow .25s; background-size:200% 200%;
+      animation:btnRGB 5s linear infinite;
     }
-
-    input {
-      width: 100%;
-      padding: 0.9rem 1rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      transition: box-shadow .3s, background .3s;
+    .btn-rare:hover{transform:scale(1.04);box-shadow:0 0 22px rgba(124,245,255,0.28)}
+    @keyframes btnRGB{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .placeholder{color:var(--muted);text-align:center;margin-top:1rem;font-size:1.05rem}
+    .results{
+      margin-top:1.6rem;width:100%;max-width:980px;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;
     }
-
-    input:focus {
-      background: rgba(255,255,255,0.12);
-      box-shadow: 0 0 20px rgba(124,245,255,0.3);
+    .item{
+      background:rgba(255,255,255,0.06);border-radius:12px;border:1px solid rgba(255,255,255,0.05);
+      overflow:hidden;transform:translateY(10px);opacity:0;animation:fadeUp .35s forwards;transition:transform .22s,box-shadow .22s;
     }
-
-    .btn-rare {
-      margin-top: 1rem;
-      padding: 0.8rem 1.6rem;
-      background: linear-gradient(90deg, cyan, violet);
-      border: none;
-      border-radius: 10px;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      font-family: 'Orbitron', sans-serif;
-      text-transform: uppercase;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      background-size: 200% 200%;
-      animation: btnRGB 5s linear infinite;
-    }
-
-    .btn-rare:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(124,245,255,0.3);
-    }
-
-    @keyframes btnRGB {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .placeholder {
-      color: var(--muted);
-      text-align: center;
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      animation: fadeIn .5s ease;
-    }
-
-    .results {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 900px;
-      margin-top: 2rem;
-    }
-
-    .item {
-      background: rgba(255,255,255,0.06);
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden;
-      transform: translateY(10px);
-      opacity: 0;
-      animation: fadeUp .4s forwards;
-      transition: transform .3s, box-shadow .3s;
-    }
-
-    .item:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 0 25px rgba(124,245,255,0.15);
-    }
-
-    .item img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-
-    .info { padding: 1rem; }
-
-    .name { font-weight: 600; font-size: 1.1rem; }
-
-    .price {
-      color: var(--accent1);
-      font-weight: bold;
-      margin-top: .3rem;
-    }
-
-    .value {
-      color: var(--accent2);
-      font-size: 0.9rem;
-      margin-top: .2rem;
-    }
-
-    .stock {
-      font-size: .9rem;
-      color: var(--muted);
-      margin-top: .3rem;
-    }
-
-    .in-stock::before { content: "🟢 "; }
-    .out-stock::before { content: "🔴 "; }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: .9rem;
-      color: var(--muted);
-      margin-top: 3rem;
-    }
-
-    footer strong { color: var(--accent1); }
-
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .item:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 10px 30px rgba(0,240,255,0.06)}
+    .item img{width:100%;height:160px;object-fit:cover;background:#111}
+    .info{padding:0.9rem}
+    .name{font-weight:700;font-size:1rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem}
+    .name .value-inline{font-family:'Orbitron',sans-serif;color:var(--accent2);font-size:.95rem}
+    .price{color:var(--accent1);font-weight:700;margin-top:.35rem}
+    .stock{font-size:.9rem;color:var(--muted);margin-top:.35rem}
+    .in-stock::before{content:"🟢 "}
+    .out-stock::before{content:"🔴 "}
+    footer{text-align:center;padding:2rem 1rem;color:var(--muted);margin-top:2rem;font-size:.9rem}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+    /* responsive small tweak */
+    @media (max-width:480px){h1{font-size:1.6rem}.name{font-size:.95rem}}
   </style>
 </head>
 <body>
   <h1>Shop 2 Brainrot</h1>
 
   <div class="search-container">
-    <input type="text" id="search" placeholder="Recherchez votre BrainRot…">
+    <input id="search" type="text" placeholder="Recherchez votre BrainRot… (ex: gold, galaxy, LOS MOBILIS)">
     <button class="btn-rare" id="rareBtn">BrainRot les plus rares 🔥</button>
-    <div class="placeholder">Tapez un nom pour trouver votre BrainRot</div>
+    <div class="placeholder" id="placeholder">Tapez un nom pour trouver votre BrainRot</div>
   </div>
 
-  <section class="results" id="results"></section>
+  <section class="results" id="results" aria-live="polite"></section>
 
   <footer>
-    ⚠️ <strong>Ce site sert simplement à vous montrer les BrainRot disponibles, leur prix et leur gain par seconde.<br>Les BrainRot sont uniquement achetables sur le serveur Discord :</strong><br>
+    ⚠️ <strong>Ce site sert simplement à vous montrer les BrainRot disponibles, leur prix et leur gain par seconde.<br>
+    Les BrainRot sont uniquement achetables sur le serveur Discord :</strong><br>
     <a href="https://discord.gg/rdFCZYhNcA" target="_blank">discord.gg/rdFCZYhNcA</a>
   </footer>
 
   <script>
+    // ---------- Produits ----------
+    // value peut être un nombre (ex: 4.5) ou une chaîne avec suffixe k/m/b (ex: "836m")
     const products = [
-      { name: "LOS MOBILIS +9 MUTA | PRIX NÉGOCIABLE", price: 25, value: 836m, file: "Screenshot_20251105-2154392.jpeg
-", stock: true },
-      { name: ".", price: 0.00, value: 0.0, file: "brainrot_galaxy.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "brainrot_flame.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "brainrot_shadow.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "brainrot_v1.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "hoodie.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "bottle.jpg", stock: false },
-      { name: ".", price: 0.00, value: 0.0, file: "brainrot_ice.jpg", stock: false }
+      { name: "LOS MOBILIS +9 MUTA | PRIX NÉGOCIABLE", price: 25, value: "836m", file: "Screenshot_20251105-2154392.jpeg", stock: true },
+      { name: "BrainRot Gold", price: 99.99, value: 4.5, file: "brainrot_gold.jpg", stock: true },
+      { name: "BrainRot Galaxy", price: 149.99, value: 8.2, file: "brainrot_galaxy.jpg", stock: false },
+      { name: "BrainRot Flame", price: 89.99, value: 3.9, file: "brainrot_flame.jpg", stock: true },
+      { name: "BrainRot Shadow", price: 129.99, value: 6.7, file: "brainrot_shadow.jpg", stock: true },
+      { name: "BrainRot V1 OG", price: 49.99, value: 1.2, file: "brainrot_v1.jpg", stock: false },
+      { name: "BrainRot Hoodie", price: 59.99, value: 2.3, file: "hoodie.jpg", stock: true },
+      { name: "BrainRot Bottle", price: 19.99, value: 0.7, file: "bottle.jpg", stock: true },
+      { name: "BrainRot Ice", price: 119.99, value: 5.4, file: "brainrot_ice.jpg", stock: true }
     ];
 
-    const searchInput = document.getElementById("search");
-    const results = document.getElementById("results");
-    const placeholder = document.querySelector(".placeholder");
-    const rareBtn = document.getElementById("rareBtn");
+    // ---------- utilitaires format / parse ----------
+    // Parse une valeur qui peut être "836m", "2.5k", "1b" ou un number.
+    function parseValue(v) {
+      if (v === null || v === undefined) return 0;
+      if (typeof v === 'number') return v;
+      if (typeof v === 'string') {
+        const s = v.trim().toLowerCase();
+        const last = s.slice(-1);
+        const num = parseFloat(s.replace(/[^\d.,-]/g, '').replace(',', '.'));
+        if (isNaN(num)) return 0;
+        if (last === 'k') return num * 1e3;
+        if (last === 'm') return num * 1e6;
+        if (last === 'b') return num * 1e9;
+        return num;
+      }
+      return 0;
+    }
+
+    // formate le nombre en abrégé lisible (ex: 836000000 -> "836M")
+    function shortFormat(n) {
+      if (n >= 1e9) return (n / 1e9).toFixed(n >= 1e10 ? 0 : 1) + 'B';
+      if (n >= 1e6) return (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + 'M';
+      if (n >= 1e3) return (n / 1e3).toFixed(n >= 1e4 ? 0 : 1) + 'k';
+      return (Math.round(n * 100) / 100).toString();
+    }
+
+    // format price en euro (simple)
+    function formatPrice(p) {
+      return '€' + Number(p).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // safe image handler: si l'image manque -> placeholder dataURI
+    const missingDataURI = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400">
+         <rect width="100%" height="100%" fill="#0b0b12"/>
+         <text x="50%" y="50%" fill="#6b6f85" font-size="20" font-family="Arial" text-anchor="middle" dy=".3em">Image non trouvée</text>
+       </svg>`
+    );
+
+    // ---------- DOM ----------
+    const searchInput = document.getElementById('search');
+    const results = document.getElementById('results');
+    const placeholder = document.getElementById('placeholder');
+    const rareBtn = document.getElementById('rareBtn');
 
     function showResults(list) {
-      results.innerHTML = "";
-      if (list.length === 0) {
-        placeholder.textContent = "Aucun BrainRot trouvé 👀";
-        placeholder.style.display = "block";
+      results.innerHTML = '';
+      if (!list || list.length === 0) {
+        placeholder.textContent = 'Aucun BrainRot trouvé 👀';
+        placeholder.style.display = 'block';
         return;
       }
-      placeholder.style.display = "none";
+      placeholder.style.display = 'none';
+
       list.forEach((p, i) => {
-        const div = document.createElement("div");
-        div.className = "item";
+        const valNum = parseValue(p.value);
+        const valLabel = shortFormat(valNum) + ' / s'; // affichage
+        const imgSrc = (typeof p.file === 'string' ? p.file.trim() : '');
+        const div = document.createElement('div');
+        div.className = 'item';
         div.style.animationDelay = `${i * 0.05}s`;
         div.innerHTML = `
-          <img src="${p.file}" alt="${p.name}">
+          <img src="${imgSrc}" alt="${escapeHtml(p.name)}" onerror="this.onerror=null;this.src='${missingDataURI}';">
           <div class="info">
-            <div class="name">${p.name}</div>
-            <div class="price">€${p.price.toFixed(2)}</div>
-            <div class="value">{${p.value}/seconde}</div>
-            <div class="stock ${p.stock ? "in-stock" : "out-stock"}">
-              ${p.stock ? "En stock" : "Rupture de stock"}
+            <div class="name">
+              <span>${escapeHtml(p.name)}</span>
+              <span class="value-inline">${escapeHtml(valLabel)}</span>
             </div>
-          </div>`;
+            <div class="price">${escapeHtml(formatPrice(p.price))}</div>
+            <div class="stock ${p.stock ? 'in-stock' : 'out-stock'}">
+              ${p.stock ? 'En stock' : 'Rupture de stock'}
+            </div>
+          </div>
+        `;
         results.appendChild(div);
       });
     }
 
-    searchInput.addEventListener("input", e => {
-      const q = e.target.value.toLowerCase().trim();
-      if (q === "") {
-        results.innerHTML = "";
-        placeholder.textContent = "Tapez un nom pour trouver votre BrainRot";
-        placeholder.style.display = "block";
+    // recherche live (insensible à la casse)
+    searchInput.addEventListener('input', (e) => {
+      const q = String(e.target.value || '').toLowerCase().trim();
+      if (q === '') {
+        results.innerHTML = '';
+        placeholder.textContent = 'Tapez un nom pour trouver votre BrainRot';
+        placeholder.style.display = 'block';
         return;
       }
-      const filtered = products.filter(p => p.name.toLowerCase().includes(q));
+      const filtered = products.filter(p => (p.name || '').toLowerCase().includes(q));
       showResults(filtered);
     });
 
-    rareBtn.addEventListener("click", () => {
-      const top = [...products].sort((a,b) => b.price - a.price).slice(0,3);
+    // top 3 les plus chers
+    rareBtn.addEventListener('click', () => {
+      const top = [...products].sort((a,b) => (b.price||0) - (a.price||0)).slice(0,3);
       showResults(top);
-      placeholder.style.display = "none";
+      placeholder.style.display = 'none';
     });
+
+    // helper: escape basique pour éviter injection dans alt/text
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str).replace(/[&<>"'`=\/]/g, function (s) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'})[s];
+      });
+    }
+
+    // Pour tests rapides : afficher par défaut top 3
+    // showResults([...products].sort((a,b)=> (b.price||0)-(a.price||0)).slice(0,3));
   </script>
 </body>
 </html>
