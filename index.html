@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHOP2BRAINROT</title>
+  <title>Shop de BrainRot</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;600&display=swap');
 
     :root {
       --bg: #05060a;
-      --card: rgba(255,255,255,0.05);
-      --accent1: #7cf5ff;
-      --accent2: #9b6bff;
       --text: #e8eefc;
       --muted: #a6b1d6;
     }
@@ -20,96 +17,117 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(1000px at 20% 10%, rgba(124,245,255,0.07), transparent),
-                  radial-gradient(900px at 80% 80%, rgba(155,107,255,0.05), transparent),
+      background: radial-gradient(1000px at 10% 10%, rgba(124,245,255,0.07), transparent),
+                  radial-gradient(900px at 90% 80%, rgba(155,107,255,0.05), transparent),
                   var(--bg);
       color: var(--text);
-      min-height: 100vh;
       overflow-x: hidden;
+      min-height: 100vh;
+      animation: rgbGlow 10s linear infinite;
+    }
+
+    @keyframes rgbGlow {
+      0% { background-color: #05060a; }
+      25% { background-color: #0a0630; }
+      50% { background-color: #060930; }
+      75% { background-color: #0a0630; }
+      100% { background-color: #05060a; }
     }
 
     header {
       text-align: center;
       padding: 2rem 1rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
+      box-shadow: 0 0 20px rgba(255,255,255,0.03);
     }
 
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.5rem;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+      background-size: 400% 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: .6rem;
-      letter-spacing: 1px;
+      animation: rgbText 6s linear infinite;
+    }
+
+    @keyframes rgbText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .links {
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-top: .6rem;
     }
-
     .links a {
       color: var(--muted);
       text-decoration: none;
       font-weight: 500;
-      transition: color .2s;
+      transition: color .3s, text-shadow .3s;
     }
     .links a:hover {
-      color: var(--accent1);
+      color: white;
+      text-shadow: 0 0 12px cyan;
     }
 
-    .shop {
+    main {
       max-width: 1200px;
-      margin: 2.5rem auto;
+      margin: 2rem auto;
       padding: 0 1rem 4rem;
+    }
+
+    .category {
+      margin-top: 3rem;
+    }
+    .category h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, cyan, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(124,245,255,0.4);
+    }
+
+    .items {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      gap: 1.3rem;
     }
 
     .item {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.06);
       border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.05);
       overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease;
-      cursor: pointer;
-      position: relative;
-      opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp .6s forwards;
+      opacity: 0;
+      animation: fadeInUp .8s forwards;
+      transition: transform .3s ease, box-shadow .3s ease;
     }
 
     .item:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 15px 40px rgba(124,245,255,0.12);
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 0 30px rgba(124,245,255,0.15);
     }
 
     .item img {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      filter: brightness(0.9);
-      transition: filter .3s ease;
-    }
-
-    .item:hover img {
-      filter: brightness(1.05);
     }
 
     .info {
       padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: .3rem;
     }
 
     .name {
@@ -118,9 +136,9 @@
     }
 
     .price {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      color: var(--accent1);
+      color: cyan;
+      font-weight: bold;
+      margin-top: .3rem;
     }
 
     .stock {
@@ -128,81 +146,102 @@
       color: var(--muted);
     }
 
-    .in-stock::before {
-      content: "🟢 ";
-    }
-    .out-stock::before {
-      content: "🔴 ";
-    }
+    .in-stock::before { content: "🟢 "; }
+    .out-stock::before { content: "🔴 "; }
 
     footer {
       text-align: center;
-      padding: 2rem 1.5rem;
+      padding: 2rem 1rem;
       border-top: 1px solid rgba(255,255,255,0.05);
       font-size: .9rem;
       color: var(--muted);
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
     }
 
     footer strong {
-      color: var(--accent1);
+      color: cyan;
     }
 
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>SHOP2BRAINROT</h1>
+    <h1>Shop de BrainRot</h1>
     <div class="links">
       <a href="https://discord.gg/rdFCZYhNcA" target="_blank">💬 Discord</a>
       <a href="https://tiktok.com/@shop2brainrot_new" target="_blank">🎵 TikTok</a>
     </div>
   </header>
 
-  <main>
-    <section class="shop" id="shop"></section>
+  <main id="shop">
+    <!-- Catégories auto-générées -->
   </main>
 
   <footer>
     © <span id="year"></span> Shop de BrainRot — Tous droits réservés.<br>
-    ⚠️ <strong>Les produits BrainRot sont uniquement achetables via le serveur Discord :</strong> 
+    ⚠️ <strong>Les BrainRot sont uniquement achetables sur le serveur Discord :</strong> 
     <a href="https://discord.gg/rdFCZYhNcA" target="_blank">discord.gg/rdFCZYhNcA</a>
   </footer>
 
   <script>
-    const products = [
-      { name: "Tung Tung Tung Sahur", price: 19.99, file: "IMG_5577.webp", stock: true },
-      { name: "Strawberry Elephant", price: 49.99, file: "IMG_5579.webp", stock: true },
-      { name: "La Casa Boo", price: 2300, file: "IMG_5580.webp", stock: false },
-      { name: "Tapis de souris", price: 14.99, file: "tapis.jpg", stock: true },
-      { name: "Sac à dos BrainRot", price: 59.99, file: "sacados.jpg", stock: false },
-      { name: "Bouteille BrainRot", price: 24.99, file: "bouteille.jpg", stock: true }
-    ];
+    const categories = {
+      "Légendaire": [
+        { name: "BrainRot Gold", price: 99.99, file: "brainrot_gold.jpg", stock: true },
+        { name: "BrainRot Galaxy", price: 149.99, file: "brainrot_galaxy.jpg", stock: false },
+      ],
+      "Mythique": [
+        { name: "BrainRot Flame", price: 89.99, file: "brainrot_flame.jpg", stock: true },
+      ],
+      "Secret": [
+        { name: "BrainRot Shadow", price: 129.99, file: "brainrot_shadow.jpg", stock: true },
+      ],
+      "OG": [
+        { name: "BrainRot V1 OG", price: 49.99, file: "brainrot_v1.jpg", stock: false },
+      ],
+      "Autres": [
+        { name: "BrainRot Bottle", price: 19.99, file: "bottle.jpg", stock: true },
+        { name: "BrainRot Hoodie", price: 59.99, file: "hoodie.jpg", stock: true }
+      ]
+    };
 
-    const shop = document.getElementById('shop');
-    const year = document.getElementById('year');
+    const shop = document.getElementById("shop");
+    const year = document.getElementById("year");
     year.textContent = new Date().getFullYear();
 
-    products.forEach((p, i) => {
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.style.animationDelay = `${i * 0.1}s`;
-      div.innerHTML = `
-        <img src="${p.file}" alt="${p.name}">
-        <div class="info">
-          <div class="name">${p.name}</div>
-          <div class="price">€${p.price.toFixed(2)}</div>
-          <div class="stock ${p.stock ? 'in-stock' : 'out-stock'}">${p.stock ? 'En stock' : 'Rupture de stock'}</div>
-        </div>
-      `;
-      shop.appendChild(div);
+    // Générer dynamiquement les catégories
+    Object.entries(categories).forEach(([catName, items]) => {
+      const section = document.createElement("section");
+      section.className = "category";
+      const title = document.createElement("h2");
+      title.textContent = catName;
+      section.appendChild(title);
+
+      const grid = document.createElement("div");
+      grid.className = "items";
+
+      items.forEach((p, i) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.style.animationDelay = `${i * 0.1}s`;
+        div.innerHTML = `
+          <img src="${p.file}" alt="${p.name}">
+          <div class="info">
+            <div class="name">${p.name}</div>
+            <div class="price">€${p.price.toFixed(2)}</div>
+            <div class="stock ${p.stock ? "in-stock" : "out-stock"}">
+              ${p.stock ? "En stock" : "Rupture de stock"}
+            </div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+
+      section.appendChild(grid);
+      shop.appendChild(section);
     });
   </script>
 </body>
