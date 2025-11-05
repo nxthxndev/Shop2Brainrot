@@ -1,191 +1,208 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BrainRot — Amplify your Focus</title>
-  <meta name="description" content="BrainRot — solution futuriste pour booster la concentration et créativité. Page de vente moderne avec animations." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop de BrainRot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap');
+
+    :root {
+      --bg: #05060a;
+      --card: rgba(255,255,255,0.05);
+      --accent1: #7cf5ff;
+      --accent2: #9b6bff;
+      --text: #e8eefc;
+      --muted: #a6b1d6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(1000px at 20% 10%, rgba(124,245,255,0.07), transparent),
+                  radial-gradient(900px at 80% 80%, rgba(155,107,255,0.05), transparent),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: .6rem;
+      letter-spacing: 1px;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .links a:hover {
+      color: var(--accent1);
+    }
+
+    .shop {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .item {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .item:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(124,245,255,0.12);
+    }
+
+    .item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.9);
+      transition: filter .3s ease;
+    }
+
+    .item:hover img {
+      filter: brightness(1.05);
+    }
+
+    .info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      color: var(--accent1);
+    }
+
+    .stock {
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .in-stock::before {
+      content: "🟢 ";
+    }
+    .out-stock::before {
+      content: "🔴 ";
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    /* Simple appear animation */
+    .item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7cf5ff"/><stop offset="1" stop-color="#9b6bff"/></linearGradient></defs><circle cx="50" cy="50" r="44" fill="url(#g)"/><text x="50" y="58" font-family="Orbitron" font-size="28" fill="#081022" text-anchor="middle">BR</text></svg>
-        <span class="brand-name">BrainRot</span>
-      </div>
-      <nav class="nav">
-        <a href="#features">Fonctionnalités</a>
-        <a href="#pricing">Tarifs</a>
-        <a href="#testimonials">Témoignages</a>
-        <a class="btn-ghost" href="#buy">Acheter</a>
-      </nav>
+  <header>
+    <h1>Shop de BrainRot</h1>
+    <div class="links">
+      <a href="https://discord.gg/rdFCZYhNcA" target="_blank">Discord</a>
+      <a href="https://tiktok.com/@shop2brainrot_new" target="_blank">TikTok</a>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <h1>BrainRot — transforme ton attention en super-pouvoir</h1>
-          <p class="lead">Augmente la concentration, stimule la créativité et clarifie les idées avec une technologie inspirée du futur. Conçu pour créateurs, devs, et penseurs.</p>
-          <div class="hero-ctas">
-            <a id="buy" class="btn-primary" href="#pricing">Obtenir BrainRot</a>
-            <button id="demoBtn" class="btn-outline">Voir une démo</button>
-          </div>
-          <ul class="kpis">
-            <li><strong>+35%</strong><span>productivité</span></li>
-            <li><strong>4.8/5</strong><span>satisfaction</span></li>
-            <li><strong>Instant.</strong><span>installation</span></li>
-          </ul>
-        </div>
-
-        <div class="hero-card" id="productCard" aria-hidden="false">
-          <div class="card-deco"></div>
-          <div class="card-content">
-            <h3>BrainRot — Starter</h3>
-            <p class="muted">Pack d'essai — outils d'entraînement cognitif</p>
-            <div class="price">€19<span>/mois</span></div>
-            <ul class="features-mini">
-              <li>Sessions guidées</li>
-              <li>Mode créativité</li>
-              <li>Statistiques en temps réel</li>
-            </ul>
-            <button class="btn-primary small" id="cardBuy">Commencer</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- animated background waves / glitch -->
-      <div class="bg-visual">
-        <svg class="bg-blob" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet">
-          <g transform="translate(300,300)">
-            <path d="M120,-160C153,-128,176,-86,184,-37C192,12,185,66,158,99C131,132,84,143,40,157C-4,171,-47,188,-86,174C-124,160,-158,115,-184,67C-210,19,-228,-31,-214,-77C-200,-123,-154,-165,-107,-191C-60,-217,-30,-226,7,-237C44,-248,88,-212,120,-160Z" />
-          </g>
-        </svg>
-      </div>
+    <section class="shop" id="shop">
+      <!-- Produits générés par JS -->
     </section>
-
-    <!-- FEATURES -->
-    <section id="features" class="section features">
-      <div class="container">
-        <h2>Ce que BrainRot apporte</h2>
-        <div class="features-grid">
-          <article class="feature-card">
-            <div class="icon">⚡</div>
-            <h3>Réveil rapide</h3>
-            <p>Techniques micro-sessions pour revenir au maximum de ta concentration en quelques minutes.</p>
-          </article>
-          <article class="feature-card">
-            <div class="icon">🧭</div>
-            <h3>Guidage créatif</h3>
-            <p>Exercices qui poussent ton cerveau vers des associations nouvelles et utiles.</p>
-          </article>
-          <article class="feature-card">
-            <div class="icon">📊</div>
-            <h3>Statistiques</h3>
-            <p>Tableau de bord qui suit ta progression et t'aide à te fixer des objectifs.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing" class="section pricing">
-      <div class="container">
-        <h2>Plans</h2>
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Starter</h3>
-            <p class="price">€19<span>/mois</span></p>
-            <ul>
-              <li>Accès complet aux sessions</li>
-              <li>Historique 30 jours</li>
-              <li>Support mail</li>
-            </ul>
-            <button class="btn-primary select-plan" data-plan="starter">Choisir</button>
-          </div>
-          <div class="pricing-card popular">
-            <small>Populaire</small>
-            <h3>Pro</h3>
-            <p class="price">€49<span>/mois</span></p>
-            <ul>
-              <li>Toutes les fonctionnalités</li>
-              <li>Historique infini</li>
-              <li>Coaching mensuel</li>
-            </ul>
-            <button class="btn-primary select-plan" data-plan="pro">Choisir</button>
-          </div>
-          <div class="pricing-card">
-            <h3>Entreprise</h3>
-            <p class="price">Sur demande</p>
-            <ul>
-              <li>Déploiement & SLA</li>
-              <li>API dédiée</li>
-              <li>Formation</li>
-            </ul>
-            <button class="btn-ghost contact-sales">Contact</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="section testimonials">
-      <div class="container">
-        <h2>Ce qu'ils disent</h2>
-        <div class="testimonials-grid">
-          <blockquote class="testimonial">
-            <p>« BrainRot m'a aidé à trouver un focus que je croyais perdu. Mon temps de concentration a explosé. »</p>
-            <footer>— Ana, Designer</footer>
-          </blockquote>
-          <blockquote class="testimonial">
-            <p>« Les exercices sont brefs mais puissants. Idéal pour les sprints créatifs. »</p>
-            <footer>— Marc, Dev</footer>
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- BUY FORM (modal simulated inline) -->
-    <section class="section buy" aria-labelledby="buyTitle">
-      <div class="container">
-        <h2 id="buyTitle">Prêt à essayer ?</h2>
-        <form id="checkoutForm" class="checkout">
-          <div class="form-row">
-            <label for="name">Nom</label>
-            <input id="name" name="name" type="text" placeholder="Ton nom" required>
-          </div>
-          <div class="form-row">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="ex@exemple.com" required>
-          </div>
-          <div class="form-row inline">
-            <label for="plan">Plan</label>
-            <select id="plan" name="plan" required>
-              <option value="starter">Starter — €19/mois</option>
-              <option value="pro">Pro — €49/mois</option>
-            </select>
-            <button type="submit" class="btn-primary">Payer</button>
-          </div>
-          <p class="small muted">Paiement simulé — ceci est une démo.</p>
-        </form>
-        <div id="toast" class="toast" role="status" aria-live="polite"></div>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> BrainRot — Tous droits réservés.</p>
-      <div class="legal-links"><a href="#">Politique de confidentialité</a> · <a href="#">CGV</a></div>
-    </div>
+  <footer>
+    © <span id="year"></span> Shop de BrainRot — Tous droits réservés
   </footer>
 
-  <script src="script.js" defer></script>
+  <script>
+    const products = [
+      { name: "Casquette BrainRot", price: 19.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=Casquette", stock: true },
+      { name: "Hoodie BrainRot", price: 49.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Hoodie", stock: true },
+      { name: "T-shirt Futuriste", price: 29.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=T-shirt", stock: false },
+      { name: "Tapis de souris", price: 14.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Tapis+de+souris", stock: true },
+      { name: "Sac à dos BrainRot", price: 59.99, img: "https://via.placeholder.com/400x300/7cf5ff/05060a?text=Sac+à+dos", stock: false },
+      { name: "Bouteille BrainRot", price: 24.99, img: "https://via.placeholder.com/400x300/9b6bff/05060a?text=Bouteille", stock: true }
+    ];
+
+    const shop = document.getElementById('shop');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    products.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.style.animationDelay = `${i * 0.1}s`;
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <div class="info">
+          <div class="name">${p.name}</div>
+          <div class="price">€${p.price.toFixed(2)}</div>
+          <div class="stock ${p.stock ? 'in-stock' : 'out-stock'}">${p.stock ? 'En stock' : 'Rupture de stock'}</div>
+        </div>
+      `;
+      shop.appendChild(div);
+    });
+  </script>
 </body>
 </html>
