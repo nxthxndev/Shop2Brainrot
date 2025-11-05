@@ -83,6 +83,34 @@
       box-shadow: 0 0 20px rgba(124,245,255,0.3);
     }
 
+    .btn-rare {
+      margin-top: 1rem;
+      padding: 0.8rem 1.6rem;
+      background: linear-gradient(90deg, cyan, violet);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      background-size: 200% 200%;
+      animation: btnRGB 5s linear infinite;
+    }
+
+    .btn-rare:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(124,245,255,0.3);
+    }
+
+    @keyframes btnRGB {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .placeholder {
       color: var(--muted);
       text-align: center;
@@ -122,14 +150,9 @@
       object-fit: cover;
     }
 
-    .info {
-      padding: 1rem;
-    }
+    .info { padding: 1rem; }
 
-    .name {
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
+    .name { font-weight: 600; font-size: 1.1rem; }
 
     .price {
       color: var(--accent1);
@@ -167,17 +190,18 @@
   </style>
 </head>
 <body>
-  <h1> Shop 2 Brainrot</h1>
+  <h1>Shop 2 Brainrot</h1>
 
   <div class="search-container">
-    <input type="text" id="search" placeholder="Recherchez votre BrainRot ultime...">
+    <input type="text" id="search" placeholder="Recherchez votre BrainRot…">
+    <button class="btn-rare" id="rareBtn">BrainRot les plus rares 🔥</button>
     <div class="placeholder">Tapez un nom pour trouver votre BrainRot</div>
   </div>
 
   <section class="results" id="results"></section>
 
   <footer>
-    ⚠️ <strong>ce site sert simplement a vous montrer les brainrot disponibles en stock, l'argent gagner par second, Les Brainrot sont uniquement achetables sur le serveur Discord :</strong><br>
+    ⚠️ <strong>Ce site sert simplement à vous montrer les BrainRot disponibles, leur prix et leur gain par seconde.<br>Les BrainRot sont uniquement achetables sur le serveur Discord :</strong><br>
     <a href="https://discord.gg/rdFCZYhNcA" target="_blank">discord.gg/rdFCZYhNcA</a>
   </footer>
 
@@ -196,6 +220,7 @@
     const searchInput = document.getElementById("search");
     const results = document.getElementById("results");
     const placeholder = document.querySelector(".placeholder");
+    const rareBtn = document.getElementById("rareBtn");
 
     function showResults(list) {
       results.innerHTML = "";
@@ -233,6 +258,12 @@
       }
       const filtered = products.filter(p => p.name.toLowerCase().includes(q));
       showResults(filtered);
+    });
+
+    rareBtn.addEventListener("click", () => {
+      const top = [...products].sort((a,b) => b.price - a.price).slice(0,3);
+      showResults(top);
+      placeholder.style.display = "none";
     });
   </script>
 </body>
